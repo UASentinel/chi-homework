@@ -59,7 +59,7 @@ namespace Homework2
                 .Select(i => (int)char.GetNumericValue(i));
 
             // Find index of first max digit
-            if (digits != null && digits.Count() != 0)
+            if (digits != null && digits.Any())
             {
                 int maxDigit = digits.Max();
                 maxDigit += (int)'0';

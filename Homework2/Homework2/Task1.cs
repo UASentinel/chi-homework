@@ -54,7 +54,7 @@ namespace Homework2
                 .Select(i => (int)char.GetNumericValue(i));
 
             // Count sum and max value
-            if (digits != null && digits.Count() != 0)
+            if (digits != null && digits.Any())
             {
                 sum = digits.Sum();
                 maxDigit = digits.Max();

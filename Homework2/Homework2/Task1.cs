@@ -21,7 +21,7 @@ namespace Homework2
             foreach (var item in input)
             {
                 // Print input data
-                if(item == null)
+                if (item == null)
                 {
                     Console.WriteLine("Input: null");
                 }
@@ -48,20 +48,17 @@ namespace Homework2
             {
                 return;
             }
-            for (int i = 0; i < input.Length; i++)
-            {
-                // Check if item is digit
-                if (char.IsDigit(input[i]))
-                {
-                    int currentDigit = (int)char.GetNumericValue(input[i]);
-                    sum += currentDigit;
 
-                    // Check if currentDigit is greater then maxDigit
-                    if (maxDigit != 9 && currentDigit > maxDigit)
-                    {
-                        maxDigit = currentDigit;
-                    }
-                }
+            // Extract all digits from string
+            var digits = input.Where(i => char.IsDigit(i))
+                .Select(i => (int)char.GetNumericValue(i))
+                .ToList();
+
+            // Count sum and max value
+            if (digits != null && digits.Count() != 0)
+            {
+                sum = digits.Sum();
+                maxDigit = digits.Max();
             }
         }
     }

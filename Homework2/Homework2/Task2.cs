@@ -38,9 +38,6 @@ namespace Homework2
         }
         private int MaxDigitIndex(string input)
         {
-            int maxDigit = -1;
-            int index = -1;
-
             // Check for possible null value
             if (input == null)
             {
@@ -49,35 +46,30 @@ namespace Homework2
 
             // Find position of a first non space character
             int startIndex = 0;
-            for (int i = 0; i < input.Length; i++)
+            for (int i = 0; i < input.Length; i++, startIndex++)
             {
                 if (input[i] != ' ')
                 {
                     break;
                 }
-                startIndex++;
             }
 
-            // Start searching from that position
-            for (int i = startIndex; i < input.Length; i++)
+            // Extract all digits from string
+            var digits = input.Where(i => char.IsDigit(i))
+                .Select(i => (int)char.GetNumericValue(i))
+                .ToList();
+
+            // Find index of first max digit
+            if (digits != null && digits.Count() != 0)
             {
-                // If max digit is already 9 we can quit
-                if(maxDigit == 9)
-                {
-                    return index;
-                }
-                // Find index of a max digit
-                if (char.IsDigit(input[i]))
-                {
-                    int currentDigit = (int)char.GetNumericValue(input[i]);
-                    if (currentDigit > maxDigit)
-                    {
-                        maxDigit = currentDigit;
-                        index = i - startIndex;
-                    }
-                }
+                int maxDigit = digits.Max();
+                maxDigit += (int)'0';
+                int index = input.IndexOf((char)maxDigit);
+                index -= startIndex;
+                return index;
             }
-            return index;
+
+            return -1;
         }
     }
 }

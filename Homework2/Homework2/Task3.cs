@@ -29,15 +29,14 @@ namespace Homework2
         }
         private int MaxPageCount(int[] input)
         {
-            int maxPageCount = -1;
-            for(int i = 0; i < input.Count(); i++)
+            // Check for possible null value
+            if (input == null)
             {
-                // Check if pageCount is greater then maxPageCount
-                if (input[i] > maxPageCount)
-                {
-                    maxPageCount = input[i];
-                }
+                return -1;
             }
+
+            // Find max value in array
+            int maxPageCount = input.Max(i => i);
             return maxPageCount;
         }
     }

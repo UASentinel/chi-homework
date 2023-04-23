@@ -50,7 +50,7 @@ namespace Homework2
             }
             for (int i = 0; i < input.Length; i++)
             {
-                // Check if digit
+                // Check if item is digit
                 if (char.IsDigit(input[i]))
                 {
                     int currentDigit = (int)char.GetNumericValue(input[i]);

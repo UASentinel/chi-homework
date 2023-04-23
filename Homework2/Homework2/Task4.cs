@@ -54,21 +54,25 @@ namespace Homework2
         {
             firstIndex = -1;
             lastIndex = -1;
-            int maxSpeed = -1;
-            for(int i = 0; i < input.Count(); i++)
+
+            // Check for possible null value
+            if (input == null)
             {
-                // Case for first index
-                if (input[i] > maxSpeed)
-                {
-                    maxSpeed = input[i];
-                    firstIndex = i;
-                    lastIndex = -1;
-                }
-                // Case for last index
-                else if (input[i] == maxSpeed)
-                {
-                    lastIndex = i;
-                }
+                return;
+            }
+
+            // Find max speed value
+            int maxSpeed = input.Max(i => i);
+            var inputList = input.ToList();
+
+            // Find indexes of first and last max speed values
+            firstIndex = inputList.IndexOf(maxSpeed);
+            lastIndex = inputList.LastIndexOf(maxSpeed);
+
+            // Check if these indexes refer to the same item
+            if(firstIndex == lastIndex)
+            {
+                lastIndex = -1;
             }
         }
     }

@@ -57,13 +57,20 @@ namespace Homework2
                 }
                 startIndex++;
             }
+
+            // Start searching from that position
             for (int i = startIndex; i < input.Length; i++)
             {
+                // If max digit is already 9 we can quit
+                if(maxDigit == 9)
+                {
+                    return index;
+                }
                 // Find index of a max digit
                 if (char.IsDigit(input[i]))
                 {
                     int currentDigit = (int)char.GetNumericValue(input[i]);
-                    if (maxDigit != 9 && currentDigit > maxDigit)
+                    if (currentDigit > maxDigit)
                     {
                         maxDigit = currentDigit;
                         index = i - startIndex;

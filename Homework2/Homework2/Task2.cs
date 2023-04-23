@@ -56,8 +56,7 @@ namespace Homework2
 
             // Extract all digits from string
             var digits = input.Where(i => char.IsDigit(i))
-                .Select(i => (int)char.GetNumericValue(i))
-                .ToList();
+                .Select(i => (int)char.GetNumericValue(i));
 
             // Find index of first max digit
             if (digits != null && digits.Count() != 0)

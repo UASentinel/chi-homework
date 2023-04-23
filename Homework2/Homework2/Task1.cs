@@ -51,8 +51,7 @@ namespace Homework2
 
             // Extract all digits from string
             var digits = input.Where(i => char.IsDigit(i))
-                .Select(i => (int)char.GetNumericValue(i))
-                .ToList();
+                .Select(i => (int)char.GetNumericValue(i));
 
             // Count sum and max value
             if (digits != null && digits.Count() != 0)

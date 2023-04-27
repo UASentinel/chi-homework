@@ -26,7 +26,7 @@ CREATE TABLE Orders (
 INSERT INTO Groups (gr_name, gr_temp) VALUES 
 	('group1', 20.5),
 	('group2', -2),
-	('group3', -1);
+	('group3', -5.3);
 
 SELECT * FROM Groups;
 
@@ -256,10 +256,33 @@ INSERT INTO Orders (ord_datetime, ord_an) VALUES
 
 SELECT * FROM Orders;
 
+
+
+-- Task 1
+
 SELECT DISTINCT an_name, an_price
 FROM Analysis
 INNER JOIN Orders ON Analysis.an_id = Orders.ord_an
 WHERE ord_datetime BETWEEN '2020-02-05' AND DATEADD(day, 7, '2020-02-05');
+
+
+
+--Task 2, variant 1 (general cumulative sales)
+
+SELECT gr_name, 
+       YEAR(ord_datetime) AS [year], 
+       MONTH(ord_datetime) AS [month],
+	   COUNT(ord_id) AS sales,
+       SUM(COUNT(ord_id)) OVER (PARTITION BY gr_name ORDER BY YEAR(ord_datetime), MONTH(ord_datetime)) AS cumulative_sales
+FROM Orders
+INNER JOIN Analysis ON Orders.ord_an = Analysis.an_id
+INNER JOIN Groups ON Analysis.an_group = Groups.gr_id
+GROUP BY gr_name, YEAR(ord_datetime), MONTH(ord_datetime)
+ORDER BY gr_name, YEAR(ord_datetime), MONTH(ord_datetime);
+
+
+
+--Task 2, variant 2 (cumulative sales divided by year)
 
 SELECT gr_name, 
        YEAR(ord_datetime) AS [year], 

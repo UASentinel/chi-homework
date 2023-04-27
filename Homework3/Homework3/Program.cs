@@ -18,14 +18,7 @@
             {
                 var date = new DateTime(2021, random.Next(1, 13), random.Next(1, 29));
                 var analysis = random.Next(1, 8);
-                if(i != amount - 1)
-                {
-                    result.Add($"('{date.Year}-{date.Month}-{date.Day}', {analysis}),");
-                }
-                else
-                {
-                    result.Add($"('{date.Year}-{date.Month}-{date.Day}', {analysis})");
-                }
+                result.Add($"('{date.Year}-{date.Month}-{date.Day}', {analysis}),");
             }
             return result;
         }

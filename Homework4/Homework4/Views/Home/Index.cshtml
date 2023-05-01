@@ -1,0 +1,30 @@
+﻿@using Homework4.Models;
+@model User
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h2 class="text-main">Welcome to ASP.NET Community!</h2>
+
+    <form method="post" class="form-main">
+        <fieldset>
+            <legend>Join our community</legend>
+            <label class="form-label mt-4">Name</label>
+            <input type="text" class="form-control" placeholder="Enter your name" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span><br />
+            <label class="form-label mt-4">Email address</label>
+            <input type="text" class="form-control" placeholder="Enter your email" asp-for="Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+            @*<div class="form-group">
+                <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>*@
+            <div class="btn-form">
+                <button type="submit" class="btn btn btn-success">Become a developer!</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

@@ -1,0 +1,8 @@
+﻿namespace Homework4.Models
+{
+    public class User
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
+}

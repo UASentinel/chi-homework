@@ -22,8 +22,8 @@ namespace Homework6.Models
         public Analysis OrdAn { get; set; }
         public void Print()
         {
-            Console.WriteLine($"Order Id: {OrdId}\tDateTime: {OrdDateTime.Date}\t");
-            if(OrdAn != null) Console.WriteLine($"Analysis Name: {OrdAn.AnName}");
+            Console.Write($"Order Id: {OrdId}\tDateTime: {OrdDateTime.ToShortDateString()}\t");
+            if (OrdAn != null) Console.WriteLine($"Analysis Name: {OrdAn.AnName}");
             else Console.WriteLine($"Analysis Id: {OrdAnId}");
         }
     }

@@ -11,9 +11,5 @@ namespace Homework5.Repository
     {
         public List<Order> GetByYear(int year, ADOMethod method);
         public List<Order> GetByLastYear(ADOMethod method);
-        //protected List<Order> GetByYearDataReader(int year);
-        //protected List<Order> GetByYearDataSet(int year);
-        //protected List<Order> GetByLastYearDataReader();
-        //protected List<Order> GetByLastYearDataSet();
     }
 }

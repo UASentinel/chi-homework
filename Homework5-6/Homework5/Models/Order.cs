@@ -55,9 +55,10 @@ namespace Homework5.Models
         }
         public void Print()
         {
-            Console.WriteLine($"OrdId: {OrdId}");
-            Console.WriteLine($"OrdDateTime: {OrdDateTime}");
-            Console.WriteLine($"OrdAn: {OrdAn.AnId}");
+            Console.Write($"Order Id: {OrdId}\tDateTime: {OrdDateTime.ToShortDateString()}\t");
+            if (OrdAn != null && OrdAn.AnName != null) Console.WriteLine($"Analysis Name: {OrdAn.AnName}");
+            else if (OrdAn != null) Console.WriteLine($"Analysis Id: {OrdAn.AnId}");
+            else Console.WriteLine();
         }
     }
 }

@@ -14,9 +14,5 @@ namespace Homework5.Repository
         public int Add(T entity);
         public int Update(T entity);
         public int Delete(int id);
-        //public List<T> GetDataReader();
-        //public List<T> GetDataSet();
-        //protected T GetByIdDataReader(int id);
-        //protected T GetByIdDataSet(int id);
     }
 }

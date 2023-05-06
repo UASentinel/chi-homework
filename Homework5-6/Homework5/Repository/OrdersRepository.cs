@@ -15,7 +15,7 @@ namespace Homework5.Repository
         private string ConnectionString { get; set; }
         public OrdersRepository()
         {
-            ConnectionString = "Data Source=LAPTOP-R9DA3P1V\\SQLEXPRESS;Initial Catalog=Chi-HW3;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;";
+            ConnectionString = "Data Source=LAPTOP-R9DA3P1V\\SQLEXPRESS;Initial Catalog = CHI_HW56; Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;";
         }
         public OrdersRepository(string connectionString)
         {
@@ -26,7 +26,7 @@ namespace Homework5.Repository
             using var connection = new SqlConnection(ConnectionString);
             using var command = connection.CreateCommand();
 
-            command.CommandText = "SELECT * FROM Orders INNER JOIN Analysis ON Analysis.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analysis.an_group;";
+            command.CommandText = "SELECT * FROM Orders INNER JOIN Analyzes ON Analyzes.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analyzes.an_group;";
 
             connection.Open();
 
@@ -53,7 +53,7 @@ namespace Homework5.Repository
             using var connection = new SqlConnection(ConnectionString);
             using var command = connection.CreateCommand();
 
-            command.CommandText = "SELECT * FROM Orders INNER JOIN Analysis ON Analysis.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analysis.an_group WHERE ord_id = @OrdId;";
+            command.CommandText = "SELECT * FROM Orders INNER JOIN Analyzes ON Analyzes.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analyzes.an_group WHERE ord_id = @OrdId;";
             command.Parameters.Add(new SqlParameter("@OrdId", id));
 
             connection.Open();
@@ -132,7 +132,7 @@ namespace Homework5.Repository
             using var connection = new SqlConnection(ConnectionString);
             using var command = connection.CreateCommand();
 
-            command.CommandText = "SELECT * FROM Orders INNER JOIN Analysis ON Analysis.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analysis.an_group WHERE YEAR(ord_datetime) = YEAR(@OrdDateTime);";
+            command.CommandText = "SELECT * FROM Orders INNER JOIN Analyzes ON Analyzes.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analyzes.an_group WHERE YEAR(ord_datetime) = YEAR(@OrdDateTime);";
             command.Parameters.Add(new SqlParameter("@OrdDatetime", new DateTime(year, 1, 1)));
 
             connection.Open();
@@ -160,7 +160,7 @@ namespace Homework5.Repository
             using var connection = new SqlConnection(ConnectionString);
             using var command = connection.CreateCommand();
 
-            command.CommandText = "SELECT * FROM Orders INNER JOIN Analysis ON Analysis.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analysis.an_group WHERE ord_datetime BETWEEN @OrdDateTime1 AND @OrdDateTime2;";
+            command.CommandText = "SELECT * FROM Orders INNER JOIN Analyzes ON Analyzes.an_id = Orders.ord_an INNER JOIN GROUPS ON Groups.gr_id = Analyzes.an_group WHERE ord_datetime BETWEEN @OrdDateTime1 AND @OrdDateTime2;";
             command.Parameters.Add(new SqlParameter("@OrdDatetime1", DateTime.Now.AddYears(-1)));
             command.Parameters.Add(new SqlParameter("@OrdDatetime2", DateTime.Now));
 

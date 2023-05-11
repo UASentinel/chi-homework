@@ -1,0 +1,27 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Add category";
+}
+
+<form method="post" class="form-main">
+    <div class="p-3 mt-4 div-form-main">
+        <div class="row pb-2">
+            <h2>Update category</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="Id" hidden />
+        <div class="mb-3">
+            <label>Name</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success btn-form">
+            <i class="bi bi-check-circle"></i>&nbsp;&nbsp;Submit
+        </button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-warning btn-form">
+            <i class="bi bi-backspace"></i>&nbsp;&nbsp;Back
+        </a>
+    </div>
+</form>

@@ -1,7 +1,7 @@
-﻿@model Spending
+﻿@model Category
 
 @{
-    ViewData["Title"] = "Delete spending";
+    ViewData["Title"] = "Delete category";
 }
 
 <form method="post">
@@ -9,10 +9,11 @@
         <div class="container pt-3">
             <div class="row pt-4">
                 <div class="col-9">
-                    <h2 class="text-primary">Delete spending</h2>
+                    <h2 class="text-primary">Delete category</h2>
                 </div>
                 <div class="col-9">
                     <h5 class="text-danger">Be careful, you can't undone this changes</h5>
+                    <h5 class="text-danger">Deleting this category will delete all spendings connected to it</h5>
                 </div>
             </div>
         </div>
@@ -22,29 +23,14 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th style="width:5%">Id</th>
-                        <th style="width:10%">Category</th>
-                        <th style="width:10%">Sum</th>
-                        <th style="width:10%">Date</th>
-                        <th style="width:10%">Time</th>
-                        <th style="width:30%">Comment</th>
+                        <th style="width:10%">Id</th>
+                        <th style="width:40%">Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="table-light">
                         <th>@Model.Id</th>
-                        <td>@Model.Category.Name</td>
-                        <td>@Model.Sum</td>
-                        <td>@Model.DateTime.ToShortDateString()</td>
-                        <td>@Model.DateTime.ToShortTimeString()</td>
-                        @if (Model.Comment != null)
-                        {
-                            <td>@Model.Comment</td>
-                        }
-                        else
-                        {
-                            <td>...</td>
-                        }
+                        <td>@Model.Name</td>
                     </tr>
                 </tbody>
             </table>
@@ -55,7 +41,7 @@
         <button type="submit" class="btn btn-danger btn-form">
             <i class="bi bi-trash"></i>&nbsp;&nbsp;Submit
         </button>
-        <a asp-controller="Spending" asp-action="Index" class="btn btn-warning btn-form">
+        <a asp-controller="Category" asp-action="Index" class="btn btn-warning btn-form">
             <i class="bi bi-backspace"></i>&nbsp;&nbsp;Back
         </a>
     </div>

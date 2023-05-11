@@ -6,41 +6,39 @@ using MyFinance.Models;
 
 namespace MyFinance.Controllers
 {
-    public class SpendingController : Controller
+    public class CategoryController : Controller
     {
         private MyFinanceDbContext _dbContext;
 
-        public SpendingController(MyFinanceDbContext dbContext)
+        public CategoryController(MyFinanceDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public IActionResult Index()
         {
-            var spendings = _dbContext.Spendings.Include(s => s.Category).OrderBy(s => s.DateTime).ToList();
-            return View(spendings);
+            var categories = _dbContext.Categories.ToList();
+            return View(categories);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            SetCategories();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Spending spending)
+        public IActionResult Add(Category category)
         {
             ModelState.Clear();
-            if (!spending.Validate(ModelState))
+            if (!category.Validate(ModelState))
             {
-                SetCategories();
                 TempData["error"] = "Invalid input";
-                return View(spending);
+                return View(category);
             }
             else
             {
-                _dbContext.Add(spending);
+                _dbContext.Add(category);
                 _dbContext.SaveChanges();
 
                 TempData["success"] = "Successfully added";
@@ -51,24 +49,22 @@ namespace MyFinance.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            SetCategories();
-            var spending = _dbContext.Spendings.Include(s => s.Category).FirstOrDefault(s => s.Id == id);
-            return View(spending);
+            var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+            return View(category);
         }
 
         [HttpPost]
-        public IActionResult Update(Spending spending)
+        public IActionResult Update(Category category)
         {
             ModelState.Clear();
-            if (!spending.Validate(ModelState))
+            if (!category.Validate(ModelState))
             {
-                SetCategories();
                 TempData["error"] = "Invalid input";
-                return View(spending);
+                return View(category);
             }
             else
             {
-                _dbContext.Update(spending);
+                _dbContext.Update(category);
                 _dbContext.SaveChanges();
 
                 TempData["success"] = "Successfully updated";
@@ -79,30 +75,18 @@ namespace MyFinance.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var spending = _dbContext.Spendings.Include(s => s.Category).FirstOrDefault(s => s.Id == id);
-            return View(spending);
+            var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+            return View(category);
         }
 
         [HttpPost]
-        public IActionResult Delete(Spending spending)
+        public IActionResult Delete(Category category)
         {
-            _dbContext.Remove(spending);
+            _dbContext.Remove(category);
             _dbContext.SaveChanges();
 
             TempData["success"] = "Successfully deleted";
             return RedirectToAction("Index");
-        }
-
-        private void SetCategories()
-        {
-            var categories = _dbContext.Categories.ToList();
-            List<SelectListItem> cat = categories
-                .Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }).ToList();
-            ViewData["Categories"] = cat;
         }
     }
 }

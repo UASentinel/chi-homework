@@ -1,0 +1,60 @@
+﻿@model List<Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container pt-3">
+    <div class="container pt-3">
+        <div class="row pt-4">
+            <div class="col-9">
+                <h2 class="text-primary"><i class="bi bi-bank2"></i>&nbsp;&nbsp;My categories</h2>
+            </div>
+            <div class="col-3" style="text-align: right">
+                <a asp-controller="Category" asp-action="Add" class="btn btn-success" style="margin-top: 12px">
+                    <i class="bi bi-plus-circle"></i>&nbsp;&nbsp;Add
+                </a>
+            </div>
+        </div>
+    </div>
+    <br />
+    @if (Model != null && Model.Count != 0)
+    {
+        <table class="table table-hover" style="width: 40%; margin: auto">
+            <thead>
+                <tr>
+                    <th style="width:10%">Id</th>
+                    <th style="width:35%">Name</th>
+                    <th style="width:55%" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-light">
+                        <th>@item.Id</th>
+                        <td>@item.Name</td>
+                        <td>
+                            <a asp-controller="Category" asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning mx-2 btn-sm">
+                                <i class="bi bi-pencil-square"></i>&nbsp;&nbsp;Update
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2 btn-sm">
+                                <i class="bi bi-trash"></i>&nbsp;&nbsp;Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="row pt-4">
+            <div class="col-9">
+                <h4 class="text-primary">No categories to show&nbsp;&nbsp;<i class="bi bi-emoji-frown"></i></h4>
+            </div>
+        </div>
+    }
+</div>

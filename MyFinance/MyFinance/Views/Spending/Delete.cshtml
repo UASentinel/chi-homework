@@ -1,0 +1,63 @@
+﻿@model Spending
+
+@{
+    ViewData["Title"] = "Spendings";
+}
+
+<form method="post">
+    <div class="container pt-3">
+        <div class="container pt-3">
+            <div class="row pt-4">
+                <div class="col-9">
+                    <h2 class="text-primary">Delete spending</h2>
+                </div>
+                <div class="col-9">
+                    <h4 class="text-danger">Be careful, you can't undone this cnahges</h4>
+                </div>
+            </div>
+        </div>
+        <br />
+        @if (Model != null)
+        {
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        @*<th style="width:5%">Id</th>*@
+                        <th style="width:10%">Category</th>
+                        <th style="width:10%">Sum</th>
+                        <th style="width:10%">Date</th>
+                        <th style="width:10%">Time</th>
+                        <th style="width:30%">Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-light">
+                        @*<th>@item.Id</th>*@
+                        <td>@Model.Category.Name</td>
+                        <td>@Model.Sum</td>
+                        <td>@Model.DateTime.ToShortDateString()</td>
+                        <td>@Model.DateTime.ToShortTimeString()</td>
+                        @if (Model.Comment != null)
+                        {
+                            <td>@Model.Comment</td>
+                        }
+                        else
+                        {
+                            <td>...</td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+    <div class="p-3 mt-4 div-form-main">
+        <input asp-for="Id" hidden />
+        <button type="submit" class="btn btn-danger btn-form">
+            <i class="bi bi-trash"></i>&nbsp;&nbsp;Submit
+        </button>
+        <a asp-controller="Spending" asp-action="Index" class="btn btn-warning btn-form">
+            <i class="bi bi-backspace"></i>&nbsp;&nbsp;Back
+        </a>
+    </div>
+
+</form>

@@ -31,3 +31,17 @@ body {
     margin-top: 50px;
     margin-bottom: 100px;
 }
+
+.form-statistics {
+    width: 50%;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.btn-statistics{
+    margin-top: 23px;
+    margin-left: 33px;
+}

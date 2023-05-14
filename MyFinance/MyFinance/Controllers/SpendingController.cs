@@ -17,7 +17,12 @@ namespace MyFinance.Controllers
 
         public IActionResult Index()
         {
-            var spendings = _dbContext.Spendings.Include(s => s.Category).OrderBy(s => s.DateTime).ToList();
+            var spendings = _dbContext.Spendings
+                .Include(s => s.Category)
+                .OrderBy(s => s.DateTime)
+                .Reverse()
+                .ToList();
+
             return View(spendings);
         }
 
@@ -25,6 +30,7 @@ namespace MyFinance.Controllers
         public IActionResult Add()
         {
             SetCategories();
+
             return View();
         }
 
@@ -32,10 +38,12 @@ namespace MyFinance.Controllers
         public IActionResult Add(Spending spending)
         {
             ModelState.Clear();
+
             if (!spending.Validate(ModelState))
             {
                 SetCategories();
                 TempData["error"] = "Invalid input";
+
                 return View(spending);
             }
             else
@@ -44,6 +52,7 @@ namespace MyFinance.Controllers
                 _dbContext.SaveChanges();
 
                 TempData["success"] = "Successfully added";
+
                 return RedirectToAction("Index");
             }
         }
@@ -53,6 +62,7 @@ namespace MyFinance.Controllers
         {
             SetCategories();
             var spending = _dbContext.Spendings.Include(s => s.Category).FirstOrDefault(s => s.Id == id);
+
             return View(spending);
         }
 
@@ -60,10 +70,12 @@ namespace MyFinance.Controllers
         public IActionResult Update(Spending spending)
         {
             ModelState.Clear();
+
             if (!spending.Validate(ModelState))
             {
                 SetCategories();
                 TempData["error"] = "Invalid input";
+
                 return View(spending);
             }
             else
@@ -72,6 +84,7 @@ namespace MyFinance.Controllers
                 _dbContext.SaveChanges();
 
                 TempData["success"] = "Successfully updated";
+
                 return RedirectToAction("Index");
             }
         }
@@ -80,6 +93,7 @@ namespace MyFinance.Controllers
         public IActionResult Delete(int id)
         {
             var spending = _dbContext.Spendings.Include(s => s.Category).FirstOrDefault(s => s.Id == id);
+
             return View(spending);
         }
 
@@ -90,18 +104,21 @@ namespace MyFinance.Controllers
             _dbContext.SaveChanges();
 
             TempData["success"] = "Successfully deleted";
+            
             return RedirectToAction("Index");
         }
 
         private void SetCategories()
         {
             var categories = _dbContext.Categories.ToList();
+
             List<SelectListItem> cat = categories
                 .Select(c => new SelectListItem
                 {
                     Value = c.Id.ToString(),
                     Text = c.Name
                 }).ToList();
+
             ViewData["Categories"] = cat;
         }
     }

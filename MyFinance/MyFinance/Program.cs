@@ -6,8 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("MainConnection");
 
-builder.Services.AddDbContext<MyFinanceDbContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<MyFinanceDbContext>(options => options.UseSqlServer(connectionString));
 
 
 var app = builder.Build();

@@ -18,6 +18,7 @@ namespace MyFinance.Controllers
         public IActionResult Index()
         {
             var categories = _dbContext.Categories.ToList();
+
             return View(categories);
         }
 
@@ -31,9 +32,11 @@ namespace MyFinance.Controllers
         public IActionResult Add(Category category)
         {
             ModelState.Clear();
+
             if (!category.Validate(ModelState))
             {
                 TempData["error"] = "Invalid input";
+
                 return View(category);
             }
             else
@@ -42,6 +45,7 @@ namespace MyFinance.Controllers
                 _dbContext.SaveChanges();
 
                 TempData["success"] = "Successfully added";
+
                 return RedirectToAction("Index");
             }
         }
@@ -50,6 +54,7 @@ namespace MyFinance.Controllers
         public IActionResult Update(int id)
         {
             var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+
             return View(category);
         }
 
@@ -57,9 +62,11 @@ namespace MyFinance.Controllers
         public IActionResult Update(Category category)
         {
             ModelState.Clear();
+
             if (!category.Validate(ModelState))
             {
                 TempData["error"] = "Invalid input";
+
                 return View(category);
             }
             else
@@ -68,6 +75,7 @@ namespace MyFinance.Controllers
                 _dbContext.SaveChanges();
 
                 TempData["success"] = "Successfully updated";
+
                 return RedirectToAction("Index");
             }
         }
@@ -76,6 +84,7 @@ namespace MyFinance.Controllers
         public IActionResult Delete(int id)
         {
             var category = _dbContext.Categories.FirstOrDefault(c => c.Id == id);
+
             return View(category);
         }
 
@@ -86,6 +95,7 @@ namespace MyFinance.Controllers
             _dbContext.SaveChanges();
 
             TempData["success"] = "Successfully deleted";
+
             return RedirectToAction("Index");
         }
     }

@@ -19,6 +19,7 @@ namespace MyFinance.Controllers
         {
             SetDates();
             var statistics = new Statistics(DateTime.Now.Month, DateTime.Now.Year);
+
             return View(statistics);
         }
 
@@ -27,12 +28,15 @@ namespace MyFinance.Controllers
         {
             ModelState.Clear();
             SetDates();
+
             statistics.Spendings = _dbContext.Spendings
                 .Include(s => s.Category)
                 .Where(s => s.DateTime.Month == statistics.Month && s.DateTime.Year == statistics.Year)
                 .Select(s => s)
                 .OrderBy(s => s.DateTime)
+                .Reverse()
                 .ToList();
+
             return View(statistics);
         }
 
@@ -49,16 +53,20 @@ namespace MyFinance.Controllers
                     Value = m.ToString(),
                     Text = m.ToString()
                 }).ToList();
+
             ViewData["Months"] = months;
         }
         private void SetYears()
         {
-            List<SelectListItem> years = Enumerable.Range(2010, DateTime.Now.Year - 2010 + 1)
+            var date = DateTime.Now.Year - 10;
+
+            List<SelectListItem> years = Enumerable.Range(date, DateTime.Now.Year - date + 1)
                 .Select(y => new SelectListItem
                 {
                     Value = y.ToString(),
                     Text = y.ToString()
                 }).ToList();
+
             ViewData["Years"] = years;
         }
     }
